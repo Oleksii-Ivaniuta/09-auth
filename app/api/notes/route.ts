@@ -50,27 +50,3 @@ export async function POST(request: NextRequest) {
   return NextResponse.json({ error: "Failed to create note" }, { status: 500 });
 }
 
-type Props = {
-  params: { id: string };
-};
-
-export async function DELETE(request: NextRequest, { params }: Props) {
-  const cookieStore = await cookies();
-  const { id } = params;
-  console.log(id);
-  
-  const { data } = await api.delete(`/notes/${id}`, {
-      headers: {
-      Cookie: cookieStore.toString(),
-    }
-  });
-
-  if (data) {
-    return NextResponse.json(data);
-  }
-
-  return NextResponse.json(
-	  { error: 'Failed to delete note' }, 
-	  { status: 500 }
-	);
-}
