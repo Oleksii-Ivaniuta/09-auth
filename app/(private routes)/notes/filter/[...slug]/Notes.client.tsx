@@ -1,5 +1,5 @@
 'use client';
-import { fetchNotes } from '@/lib/api';
+import { fetchNotes } from '@/lib/api/clientApi';
 import NoteList from '@/components/NoteList/NoteList';
 import Pagination from '@/components/Pagination/Pagination';
 import SearchBox from '@/components/SearchBox/SearchBox';
@@ -17,7 +17,6 @@ interface NotesClientProps {
   }
   tag: string | undefined,
 }
-
 
 
 export default function NotesClient({initialResponse, tag} : NotesClientProps) {

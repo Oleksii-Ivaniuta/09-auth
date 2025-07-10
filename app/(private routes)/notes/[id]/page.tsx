@@ -3,7 +3,7 @@ import {
     HydrationBoundary,
     dehydrate,
   } from "@tanstack/react-query";
-  import { fetchNoteById } from "@/lib/api";
+  import { fetchNoteById } from "@/lib/api/serverApi";
   import NoteDetailsClient from "./NoteDetails.client";
 import { Metadata } from "next";
   
@@ -13,7 +13,7 @@ import { Metadata } from "next";
   
 export async function generateMetadata({params}:NoteDetailsProps): Promise<Metadata> {
   const { id } = await params;
-  const note = await fetchNoteById(parseInt(id));
+  const note = await fetchNoteById(id);
   return {
     title: `Notehub - ${note.title}`,
     description: `${note.content}`,

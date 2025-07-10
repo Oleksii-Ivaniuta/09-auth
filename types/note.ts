@@ -5,6 +5,7 @@ export interface Note {
   tag: string;
   createdAt: string;
   updatedAt: string;
+  userId: string;
 }
 
 export interface NoteFormData {
@@ -12,3 +13,6 @@ export interface NoteFormData {
   content: string;
   tag: 'Todo' | 'Work' | 'Personal' | 'Meeting' | 'Shopping';
 }
+
+
+
