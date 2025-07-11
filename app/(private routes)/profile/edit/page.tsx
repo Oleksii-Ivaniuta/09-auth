@@ -5,30 +5,7 @@ import { useAuthStore } from '@/lib/store/authStore';
 import { useRouter } from 'next/navigation';
 import { editUser, type NewUserData, getMe } from '@/lib/api/clientApi';
 import { useState } from 'react';
-import { type Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: "NoteHub - edit profile",
-  description: "Take notes, organize tasks, and collaborate effortlessly. Your all-in-one digital notebook.",
-  icons: {
-    icon: '/favicon.svg',
-  },
-  openGraph: {
-    title: "NoteHub - edit profile",
-    description: "Take notes, organize tasks, and collaborate effortlessly. Your all-in-one digital notebook.",
-    url: "https://09-auth-nu.vercel.app/profile/edit",
-    siteName: 'NoteHub',
-    images: [
-      {
-        url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
-        width: 1200,
-        height: 630,
-        alt: "NoteHub",
-      },
-    ],
-    type: 'article',
-  },
-};
 
 type NewName = {
   username: string;

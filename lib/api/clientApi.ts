@@ -1,4 +1,4 @@
-import { type GetNotesResponse, type GetNotesRequest, nextServer } from './api'
+import { type GetNotesResponse, type GetNotesRequest, nextServer, User } from './api'
 import type { Note, NoteFormData } from "../../types/note";
 
 export type RegisterRequest = {
@@ -47,11 +47,7 @@ export const logout = async () => {
     return res.data;
 }
 
-export type User = {
-        username: string,
-        email: string,
-        avatar: string
-}
+
 
 export const getMe = async () => {
     const res = await nextServer.get<User>('/users/me', {

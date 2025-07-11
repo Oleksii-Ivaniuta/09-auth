@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers';
-import { type GetNotesResponse, type GetNotesRequest, nextServer } from './api'
+import { type GetNotesResponse, type GetNotesRequest, nextServer, User } from './api'
 import {type Note} from '@/types/note'
 
 
@@ -38,8 +38,15 @@ export async function fetchNoteById(id: string): Promise<Note> {
         Cookie: cookieStore.toString(),
     }}
     );
-  console.log(response.data);
   
     return response.data;
 }
   
+export const getMe = async () => {
+  const cookieStore = await cookies();
+    const res = await nextServer.get<User>('/users/me', {headers: {
+        Cookie: cookieStore.toString(),
+    }}
+    );
+  return res.data;
+  };

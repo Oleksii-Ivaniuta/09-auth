@@ -24,3 +24,9 @@ export type GetNotesResponse = {
   notes: Note[];
   totalPages: number;
 };
+
+export type User = {
+        username: string,
+        email: string,
+        avatar: string
+}

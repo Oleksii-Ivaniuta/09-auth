@@ -1,37 +1,38 @@
-'use client';
 import Image from 'next/image';
 import css from './ProfilePage.module.css';
-import { useAuthStore } from '@/lib/store/authStore';
 import Link from 'next/link';
 import { type Metadata } from 'next';
+import { getMe } from '@/lib/api/serverApi';
 
-export const metadata: Metadata = {
-  title: "NoteHub - profile",
-  description: "Take notes, organize tasks, and collaborate effortlessly. Your all-in-one digital notebook.",
-  icons: {
-    icon: '/favicon.svg',
-  },
-  openGraph: {
-    title: "NoteHub - profile",
+export async function generateMetadata(): Promise<Metadata> {
+  const user = await getMe();
+  return {
+    title: `NoteHub - ${user.username}`,
     description: "Take notes, organize tasks, and collaborate effortlessly. Your all-in-one digital notebook.",
-    url: "https://09-auth-nu.vercel.app/profile",
-    siteName: 'NoteHub',
-    images: [
-      {
-        url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
-        width: 1200,
-        height: 630,
-        alt: "NoteHub",
-      },
-    ],
-    type: 'article',
-  },
-};
+    icons: {
+      icon: '/favicon.svg',
+    },
+    openGraph: {
+      title: `NoteHub - ${user.username}`,
+      description: "Take notes, organize tasks, and collaborate effortlessly. Your all-in-one digital notebook.",
+      url: "https://09-auth-nu.vercel.app/profile",
+      siteName: 'NoteHub',
+      images: [
+        {
+          url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+          width: 1200,
+          height: 630,
+          alt: "NoteHub",
+        },
+      ],
+      type: 'article',
+    },
+  };
+}
 
 
-
-export default function Profile() {
-  const user = useAuthStore().user;
+export default async function Profile() {
+  const user = await getMe();
   const avatarUrl = user ? user.avatar : '/avatar.webp';
   return (
     <main className={css.mainContent}>
