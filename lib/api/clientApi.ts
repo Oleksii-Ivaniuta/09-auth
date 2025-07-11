@@ -119,4 +119,23 @@ export async function removeNote(id: string): Promise<Note> {
   return response.data;
 }
 
+export type NewUserData = {
+  email: string;
+  username: string;
+};
 
+export type NewUserDataResponse = {
+  username: string,
+  email: string,
+  avatar: string,
+}
+
+export async function editUser(newData: NewUserData): Promise<NewUserDataResponse> {
+    const response = await nextServer.patch<NewUserDataResponse>(
+      'users/me', newData, {withCredentials: true}
+    );
+  console.log(response);
+  
+    return response.data;
+}
+  

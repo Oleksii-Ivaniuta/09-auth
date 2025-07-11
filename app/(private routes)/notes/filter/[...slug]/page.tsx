@@ -15,7 +15,7 @@ export async function generateMetadata({params}: NotesProps):Promise<Metadata> {
   openGraph: {
     title: `Notehub - ${category}`,
   description: `Explore all notes in the ${category} category. Stay organized and easily find what matters most`,
-    url: `https://08-zustand-three.vercel.app/notes/filter/${category}`,
+    url: `https://09-auth-nu.vercel.app/notes/filter/${category}`,
     siteName: 'NoteHub',
     images: [
       {

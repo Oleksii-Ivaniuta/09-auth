@@ -4,6 +4,31 @@ import css from './SingUpPage.module.css';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useAuthStore } from '@/lib/store/authStore';
+import { type Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "NoteHub - sing up",
+  description: "Take notes, organize tasks, and collaborate effortlessly. Your all-in-one digital notebook.",
+  icons: {
+    icon: '/favicon.svg',
+  },
+  openGraph: {
+    title: "NoteHub - sing up",
+    description: "Take notes, organize tasks, and collaborate effortlessly. Your all-in-one digital notebook.",
+    url: "https://09-auth-nu.vercel.app/sing-up",
+    siteName: 'NoteHub',
+    images: [
+      {
+        url: 'https://ac.goit.global/fullstack/react/notehub-og-meta.jpg',
+        width: 1200,
+        height: 630,
+        alt: "NoteHub",
+      },
+    ],
+    type: 'article',
+  },
+};
+
 
 export default function Register() {
   const router = useRouter();
