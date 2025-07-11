@@ -51,7 +51,8 @@ export default function EditProfile() {
         <form className={css.profileInfo} action={handleSubmit}>
           <div className={css.usernameWrapper}>
             <label htmlFor="username">Username:</label>
-            <input id="username" type="text" name="username" className={css.input} />
+            <input
+            defaultValue={user?.username}  id="username" type="text" name="username" className={css.input} />
           </div>
 
           <p>Email: {user?.email}</p>
