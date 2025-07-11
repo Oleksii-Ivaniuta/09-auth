@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { cookies } from 'next/headers';
 import { parse } from 'cookie';
-import { checkServerSession } from './lib/api/clientApi';
+import { checkServerSession } from './lib/api/serverApi';
 
 const privateRoutes = ['/profile', '/notes'];
 const publicRoutes = ['/sign-in', '/sign-up'];
@@ -12,8 +12,8 @@ export async function middleware(request: NextRequest) {
   const accessToken = cookieStore.get('accessToken')?.value;
   const refreshToken = cookieStore.get('refreshToken')?.value;
 
-  const isPublicRoute = publicRoutes.some((route) => pathname.startsWith(route));
-  const isPrivateRoute = privateRoutes.some((route) => pathname.startsWith(route));
+  const isPublicRoute = publicRoutes.some((route) => pathname.includes(route));
+  const isPrivateRoute = privateRoutes.some((route) => pathname.includes(route));
 
   if (!accessToken) {
     if (refreshToken) {
@@ -37,7 +37,7 @@ export async function middleware(request: NextRequest) {
         // Якщо сесія все ще активна:
         // для публічного маршруту — виконуємо редірект на головну.
         if (isPublicRoute) {
-          return NextResponse.redirect(new URL('/', request.url), {
+          return NextResponse.redirect(new URL('/', request.nextUrl.origin), {
             headers: {
               Cookie: cookieStore.toString(),
             },
@@ -61,14 +61,14 @@ export async function middleware(request: NextRequest) {
 
     // приватний маршрут — редірект на сторінку входу
     if (isPrivateRoute) {
-      return NextResponse.redirect(new URL('/sign-in', request.url));
+      return NextResponse.redirect(new URL('/sign-in', request.nextUrl.origin));
     }
   }
 
   // Якщо accessToken існує:
   // публічний маршрут — виконуємо редірект на головну
   if (isPublicRoute) {
-    return NextResponse.redirect(new URL('/', request.url));
+    return NextResponse.redirect(new URL('/', request.nextUrl.origin));
   }
   // приватний маршрут — дозволяємо доступ
   if (isPrivateRoute) {
@@ -77,5 +77,5 @@ export async function middleware(request: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/profile/:path*', '/sign-in', '/sign-up', '/notes'],
+  matcher: ['/profile', '/sign-in', '/sign-up', '/notes'],
 };

@@ -1,4 +1,4 @@
-import { type GetNotesResponse, type GetNotesRequest, nextServer, } from './api';
+import { type GetNotesResponse, type GetNotesRequest, nextServer, ServerBoolResponse, } from './api';
 import type { Note, NoteFormData } from "../../types/note";
 import { type User } from '@/types/user';
 export type RegisterRequest = {
@@ -14,7 +14,6 @@ export type RegisterResponse = {
 
 export const register = async (data: RegisterRequest) => {
     const res = await nextServer.post<RegisterResponse>('/auth/register', data);
-    console.log(res.data);
   return res.data;
 };
 
@@ -33,7 +32,6 @@ message?: string,
   
 export const login = async (data: LoginRequest) => {
     const res = await nextServer.post<LoginResponse>('/auth/login', data);
-    console.log(res.data);
     return res.data;
 }
 
@@ -57,8 +55,8 @@ export const getMe = async () => {
   return res.data;
   };
 
-export const checkServerSession = async () => {
-  const res = await nextServer.get('/auth/session', {
+export const checkSession = async () => {
+  const res = await nextServer.get<ServerBoolResponse>('/auth/session', {
     withCredentials: true,
   });
  return res;
@@ -130,8 +128,7 @@ export async function editUser(newData: NewUserData): Promise<NewUserDataRespons
     const response = await nextServer.patch<NewUserDataResponse>(
       'users/me', newData, {withCredentials: true}
     );
-  console.log(response);
-  
+ 
     return response.data;
 }
   

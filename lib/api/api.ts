@@ -25,3 +25,6 @@ export type GetNotesResponse = {
   totalPages: number;
 };
 
+export type ServerBoolResponse = {
+  success: boolean;
+}

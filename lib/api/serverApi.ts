@@ -1,5 +1,5 @@
 import { cookies } from 'next/headers';
-import { type GetNotesResponse, type GetNotesRequest, nextServer } from './api'
+import { type GetNotesResponse, type GetNotesRequest, nextServer, ServerBoolResponse } from './api'
 import {type Note} from '@/types/note'
 import { type User } from '@/types/user';
 
@@ -49,4 +49,13 @@ export const getMe = async () => {
     }}
     );
   return res.data;
-  };
+};
+  
+
+export const checkServerSession = async () => {
+  const cookieStore = await cookies();
+  const res = await nextServer.get<ServerBoolResponse>('/auth/session', {headers: {
+        Cookie: cookieStore.toString(),
+    }});
+ return res;
+};
