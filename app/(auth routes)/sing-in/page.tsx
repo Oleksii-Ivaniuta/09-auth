@@ -1,21 +1,24 @@
 'use client'
 import { useRouter } from "next/navigation";
 import css from "./SingInPage.module.css"
-import { login, LoginRequest } from "@/lib/api/clientApi";
+import { login, LoginRequest, getMe } from "@/lib/api/clientApi";
 import { useState } from "react";
+import { useAuthStore } from "@/lib/store/authStore";
 
 
 export default function Login() {
 const router = useRouter();
   const [error, setError] = useState<string | null>(null);
-
+const setUser = useAuthStore((state) => state.setUser);
 
 
   const handleSubmit = async (formData: FormData) => {
-    try {
+        try {
       const regData = Object.fromEntries(formData) as LoginRequest;
-      const res = await login(regData);
-      if (res.email) {
+          const res = await login(regData);
+          const user = await getMe();
+          if (res.email) {
+            setUser(user);
         router.push("/profile");
       }
       else if (res.message) {
