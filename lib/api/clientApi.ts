@@ -1,4 +1,4 @@
-import { type GetNotesResponse, type GetNotesRequest, nextServer, User } from './api'
+import { type GetNotesResponse, type GetNotesRequest, nextServer, type User } from './api';
 import type { Note, NoteFormData } from "../../types/note";
 
 export type RegisterRequest = {
