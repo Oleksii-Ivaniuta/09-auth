@@ -43,9 +43,7 @@ export type LogoutResponse = {
 }
 
 export const logout = async () => {
-    const res = await nextServer.post<LogoutResponse>('/auth/logout');
-    console.log(res.data);
-    
+    const res = await nextServer.post<LogoutResponse>('/auth/logout');   
     return res.data;
 }
 
@@ -118,8 +116,6 @@ export async function removeNote(id: string): Promise<Note> {
   const response = await nextServer.delete<Note>(
     `notes/${id}`, {withCredentials: true}
   );
-console.log(response.data);
-
   return response.data;
 }
 
