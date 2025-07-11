@@ -13,7 +13,7 @@ export default function AuthNavigation() {
   const handleLogout = async () => {
     await logout();
     clearIsAuthenticated();
-    router.push('/sing-in'); 
+    router.push('/sign-in'); 
 }
   return (
     <>
@@ -32,13 +32,13 @@ export default function AuthNavigation() {
 
       {!isAuthenticated && (<>
         <li className={css.navigationItem}>
-          <a href="/sing-in" className={css.navigationLink}>
+          <a href="/sign-in" className={css.navigationLink}>
             Login
           </a>
         </li>
 
         <li className={css.navigationItem}>
-          <a href="/sing-up" className={css.navigationLink}>
+          <a href="/sign-up" className={css.navigationLink}>
             Sign up
           </a>
         </li></>)}
