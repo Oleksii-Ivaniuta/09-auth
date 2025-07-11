@@ -36,5 +36,5 @@ export async function GET() {
       return NextResponse.json({});
     }
   }
-  return NextResponse.json({});
+ return NextResponse.json({});
 }
