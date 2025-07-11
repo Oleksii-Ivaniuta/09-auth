@@ -1,7 +1,7 @@
 import { cookies } from 'next/headers';
-import { type GetNotesResponse, type GetNotesRequest, nextServer, User } from './api'
+import { type GetNotesResponse, type GetNotesRequest, nextServer } from './api'
 import {type Note} from '@/types/note'
-
+import { type User } from '@/types/user';
 
 
 export async function fetchNotes(
