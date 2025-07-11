@@ -41,7 +41,7 @@ export async function generateMetadata({params}:NoteDetailsProps): Promise<Metad
   
     await queryClient.prefetchQuery({
       queryKey: ["Note", parseInt(id)],
-      queryFn: () => fetchNoteById(parseInt(id)),
+      queryFn: () => fetchNoteById(id),
     });
   
   

@@ -65,9 +65,7 @@ export const checkServerSession = async () => {
   const res = await nextServer.get('/auth/session', {
     withCredentials: true,
   });
-  console.log(res);
-  
-  return res;
+ return res;
 };
 
 
